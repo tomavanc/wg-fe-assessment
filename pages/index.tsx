@@ -1,19 +1,9 @@
-import {
-  Container,
-  Box,
-  VStack,
-  Flex,
-  Heading,
-  Spacer,
-} from '@chakra-ui/react';
+import { Container, Box, Flex, Heading, Spacer } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useQuery } from 'react-query';
-import { fetchPokemons } from '../api/fetchers';
+import ItemList from '../components/ItemList';
 
 const Home: NextPage = () => {
-  const { data } = useQuery(['pokemons'], fetchPokemons);
-
   return (
     <div>
       <Head>
@@ -27,38 +17,7 @@ const Home: NextPage = () => {
           <Heading py='10'>Pokemon showcase</Heading>
           <Flex>
             <Box w='25vw'>
-              <VStack>
-                <Box
-                  w='100%'
-                  p={5}
-                  shadow='md'
-                  borderWidth='1px'
-                  flex='1'
-                  borderRadius='md'
-                >
-                  test
-                </Box>
-                <Box
-                  w='100%'
-                  p={5}
-                  shadow='md'
-                  borderWidth='1px'
-                  flex='1'
-                  borderRadius='md'
-                >
-                  test
-                </Box>
-                <Box
-                  w='100%'
-                  p={5}
-                  shadow='md'
-                  borderWidth='1px'
-                  flex='1'
-                  borderRadius='md'
-                >
-                  test
-                </Box>
-              </VStack>
+              <ItemList />
             </Box>
             <Spacer />
             <Box w='70vw'>
