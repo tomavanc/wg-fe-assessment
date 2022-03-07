@@ -8,8 +8,12 @@ import {
 } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useQuery } from 'react-query';
+import { fetchPokemons } from '../api/fetchers';
 
 const Home: NextPage = () => {
+  const { data } = useQuery(['pokemons'], fetchPokemons);
+
   return (
     <div>
       <Head>
