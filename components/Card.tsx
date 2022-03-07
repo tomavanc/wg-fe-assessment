@@ -1,13 +1,19 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import { fetchPokemon } from '../api/fetchers';
 
 export default function Card({ name }: { name?: string }) {
-  const { data } = useQuery(['pokemon', name], () => fetchPokemon(name!), {
-    enabled: !!name,
-  });
+  const { data: pokemon } = useQuery(
+    ['pokemon', name],
+    () => fetchPokemon(name!),
+    {
+      enabled: !!name,
+    }
+  );
 
-  console.log('data', data);
+  if (!pokemon) {
+    return null;
+  }
 
   return (
     <Box
@@ -18,7 +24,21 @@ export default function Card({ name }: { name?: string }) {
       flex='1'
       borderRadius='md'
     >
-      box
+      <Text>
+        {pokemon.name} ({pokemon.id})
+      </Text>
+
+      <Text>Weight: {pokemon.weight}</Text>
+
+      <Text>Height: {pokemon.height}</Text>
+
+      <Text>Moves</Text>
+
+      <ul>
+        {pokemon.moves.map(({ move }) => (
+          <li key={move.name}>{move.name}</li>
+        ))}
+      </ul>
     </Box>
   );
 }
