@@ -1,4 +1,4 @@
-import { Box, Image, Text } from '@chakra-ui/react';
+import { Box, Center, Heading, Image, Text, Flex } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import { fetchPokemon } from '../api/fetchers';
 
@@ -24,23 +24,38 @@ export default function Card({ name }: { name?: string }) {
       flex='1'
       borderRadius='md'
     >
-      <Text>
-        {pokemon.name} ({pokemon.id})
-      </Text>
+      <Center>
+        <Heading as='h2' size='xl'>
+          {pokemon.name} ({pokemon.id})
+        </Heading>
+      </Center>
 
-      <Image src={pokemon.sprites.front_default} alt={pokemon.name} />
+      <Center>
+        <Image
+          src={pokemon.sprites.front_default}
+          alt={pokemon.name}
+          boxSize='250px'
+          objectFit='cover'
+        />
+      </Center>
 
-      <Text>Weight: {pokemon.weight}</Text>
+      <Center>
+        <Text fontSize='lg'>Weight {pokemon.weight}</Text>
+      </Center>
 
-      <Text>Height: {pokemon.height}</Text>
+      <Center>
+        <Text fontSize='lg'>Height {pokemon.height}</Text>
+      </Center>
 
-      <Text>Moves</Text>
+      <Center py='5'>
+        <Text fontSize='xl'>Moves</Text>
+      </Center>
 
-      <ul>
+      <Flex maxH='300px' overflow='scroll' direction='column'>
         {pokemon.moves.map(({ move }) => (
-          <li key={move.name}>{move.name}</li>
+          <Center key={move.name}>{move.name}</Center>
         ))}
-      </ul>
+      </Flex>
     </Box>
   );
 }
