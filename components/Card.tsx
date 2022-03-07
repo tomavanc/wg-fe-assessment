@@ -1,4 +1,4 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Image, Text } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import { fetchPokemon } from '../api/fetchers';
 
@@ -27,6 +27,8 @@ export default function Card({ name }: { name?: string }) {
       <Text>
         {pokemon.name} ({pokemon.id})
       </Text>
+
+      <Image src={pokemon.sprites.front_default} alt={pokemon.name} />
 
       <Text>Weight: {pokemon.weight}</Text>
 
