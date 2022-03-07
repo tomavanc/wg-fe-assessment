@@ -1,6 +1,7 @@
 import { Container, Box, Flex, Heading, Spacer } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Card from '../components/Card';
 import ItemList from '../components/ItemList';
 
 const Home: NextPage = () => {
@@ -21,16 +22,7 @@ const Home: NextPage = () => {
             </Box>
             <Spacer />
             <Box w='70vw'>
-              <Box
-                w='100%'
-                p={5}
-                shadow='md'
-                borderWidth='1px'
-                flex='1'
-                borderRadius='md'
-              >
-                box
-              </Box>
+              <Card name='bulbasaur' />
             </Box>
           </Flex>
         </Container>

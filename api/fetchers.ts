@@ -19,3 +19,11 @@ export async function fetchPokemons() {
 
   return data;
 }
+
+export async function fetchPokemon(id: string) {
+  const { data } = await axios.get<any>(
+    `https://pokeapi.co/api/v2/pokemon/${id}`
+  );
+
+  return data;
+}
