@@ -2,12 +2,8 @@ import { Box, Text, Stack } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import { fetchPokemons } from '../api/fetchers';
 
-import Image from 'next/image';
-
 export default function ItemList() {
   const { data } = useQuery(['pokemons'], fetchPokemons);
-
-  console.log('data', data);
 
   return (
     <Stack>
