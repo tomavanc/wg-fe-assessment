@@ -1,10 +1,9 @@
 import { Container, Box, Flex, Spacer } from '@chakra-ui/react';
 import Head from 'next/head';
 import Card from '../components/Card';
-import Header from '../layout/Header';
 import ItemList from '../components/ItemList';
+import { Header, Footer } from '../layout';
 import { useStore } from '../lib/store';
-import Footer from '../layout/Footer';
 
 export default function Home() {
   const { active } = useStore();
