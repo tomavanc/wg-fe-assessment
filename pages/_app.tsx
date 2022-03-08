@@ -6,9 +6,7 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { initializeStore, Provider, State } from '../lib/store';
 import { StoreApi, UseBoundStore } from 'zustand';
 
-type AppT = AppProps & { pageProps: { initialZustandState: State } };
-
-function MyApp({ Component, pageProps }: AppT) {
+function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient();
   const createStore = initializeStore(pageProps.initialZustandState);
 
