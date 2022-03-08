@@ -12,9 +12,10 @@ interface PokemonListItem {
   url: string;
 }
 
-export async function fetchPokemons() {
+export async function fetchPokemons({ page }: { page: number }) {
   const { data } = await axios.get<PokemonList>(
-    'https://pokeapi.co/api/v2/pokemon'
+    'https://pokeapi.co/api/v2/pokemon',
+    { params: { offset: page, limit: page } }
   );
 
   return data;

@@ -5,13 +5,15 @@ import { fetchPokemons } from '../api/fetchers';
 import { useStore } from '../lib/store';
 
 export default function ItemList() {
-  const { data } = useQuery(['pokemons'], fetchPokemons);
+  const { active, page, favorite, setActive } = useStore();
 
-  const { active, favorite, setActive } = useStore();
+  const { data: pokemons } = useQuery(['pokemons'], () =>
+    fetchPokemons({ page })
+  );
 
   return (
-    <Stack h='700px' overflow='scroll'>
-      {data?.results.map(({ name }) => (
+    <Stack h='600px' overflow='scroll'>
+      {pokemons?.results.map(({ name }) => (
         <Flex
           key={name}
           w='100%'
