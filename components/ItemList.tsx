@@ -6,7 +6,7 @@ export default function ItemList() {
   const { data } = useQuery(['pokemons'], fetchPokemons);
 
   return (
-    <Stack>
+    <Stack h='700px' overflow='scroll'>
       {data?.results.map(({ name }) => (
         <Box
           key={name}
