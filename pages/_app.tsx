@@ -3,15 +3,22 @@ import type { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { Provider, useCreateStore } from '../lib/store';
+import { initializeStore, Provider, State } from '../lib/store';
+import { StoreApi, UseBoundStore } from 'zustand';
 
-function MyApp({ Component, pageProps }: AppProps) {
+type AppT = AppProps & { pageProps: { initialZustandState: State } };
+
+function MyApp({ Component, pageProps }: AppT) {
   const queryClient = new QueryClient();
-  const createStore = useCreateStore(pageProps.initialZustandState);
+  const createStore = initializeStore(pageProps.initialZustandState);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Provider createStore={createStore}>
+      <Provider
+        createStore={
+          createStore as () => UseBoundStore<object, StoreApi<object>>
+        }
+      >
         <ChakraProvider>
           <Component {...pageProps} />
         </ChakraProvider>
