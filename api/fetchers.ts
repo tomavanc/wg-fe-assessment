@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-interface PokemonList {
+export interface PokemonList {
   count: number;
   next: string;
   previous: null;

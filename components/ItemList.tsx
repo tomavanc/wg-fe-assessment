@@ -1,20 +1,19 @@
 import { StarIcon } from '@chakra-ui/icons';
-import { Flex, Text, Stack, Button, Spacer } from '@chakra-ui/react';
+import { Flex, Text, Stack, Button, Spacer, Skeleton } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
-import { fetchPokemons } from '../api/fetchers';
+import { fetchPokemons, PokemonList } from '../api/fetchers';
 import { useStore } from '../lib/store';
 
 export default function ItemList() {
-  const { active, favorite, setActive, page, nextPage, previousPage } =
-    useStore();
+  const { page, nextPage, previousPage } = useStore();
 
-  const { data: pokemons } = useQuery(['pokemons', page], () =>
+  const { isFetching, data: pokemons } = useQuery(['pokemons', page], () =>
     fetchPokemons({ page })
   );
 
   return (
     <Stack>
-      <Flex>
+      <Flex h='100%' align='center'>
         <Button
           colorScheme='teal'
           variant='outline'
@@ -31,26 +30,44 @@ export default function ItemList() {
         </Button>
       </Flex>
 
-      {pokemons?.results.map(({ name }) => (
-        <Flex
-          key={name}
-          w='100%'
-          p={5}
-          shadow='md'
-          borderWidth={name === favorite ? '3px' : '1px'}
-          flex='1'
-          borderRadius='md'
-          color={name === favorite ? '#2a75bb' : '#000'}
-          borderColor={name === favorite ? '#2a75bb' : '#E8E8E8'}
-          bg={name === active ? '#ffcb05' : '#FFF'}
-          onClick={() => setActive(name)}
-          justify='space-between'
-          align='center'
-        >
-          <Text>{name}</Text>
-          {name === favorite && <StarIcon color='#2a75bb' />}
-        </Flex>
-      ))}
+      <PokemonList pokemons={pokemons} isFetching={isFetching} />
     </Stack>
+  );
+}
+
+function PokemonList({
+  pokemons,
+  isFetching,
+}: {
+  pokemons: PokemonList | undefined;
+  isFetching: boolean;
+}) {
+  const { active, favorite, setActive } = useStore();
+
+  return (
+    <>
+      {pokemons?.results.map(({ name }) => (
+        <Skeleton key={name} isLoaded={!isFetching}>
+          <Flex
+            key={name}
+            w='100%'
+            p={5}
+            shadow='md'
+            borderWidth={name === favorite ? '3px' : '1px'}
+            flex='1'
+            borderRadius='md'
+            color={name === favorite ? '#2a75bb' : '#000'}
+            borderColor={name === favorite ? '#2a75bb' : '#E8E8E8'}
+            bg={name === active ? '#ffcb05' : '#FFF'}
+            onClick={() => setActive(name)}
+            justify='space-between'
+            align='center'
+          >
+            <Text>{name}</Text>
+            {name === favorite && <StarIcon color='#2a75bb' />}
+          </Flex>
+        </Skeleton>
+      ))}
+    </>
   );
 }
