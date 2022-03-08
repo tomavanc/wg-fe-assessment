@@ -6,7 +6,6 @@ export default function Header() {
       <Heading py='10' color='#3c5aa6'>
         Pokemon showcase
       </Heading>
-      ;
     </Center>
   );
 }
