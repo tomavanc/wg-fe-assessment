@@ -2,6 +2,8 @@ import { type } from 'os';
 import create from 'zustand';
 import createContext from 'zustand/context';
 
+const PAGE_SIZE = 5;
+
 export interface State {
   active: string | null;
   favorite: string | null;
@@ -16,7 +18,7 @@ type InitialState = Pick<State, 'active' | 'favorite' | 'page'>;
 const initialState: InitialState = {
   active: null,
   favorite: null,
-  page: 10,
+  page: PAGE_SIZE,
 };
 
 export const initializeStore = (data = {}) => {
@@ -42,12 +44,12 @@ export const initializeStore = (data = {}) => {
       },
       nextPage: () => {
         set({
-          page: get().page + 10,
+          page: get().page + PAGE_SIZE,
         });
       },
       previousPage: () => {
         set({
-          page: get().page - 10,
+          page: get().page - PAGE_SIZE,
         });
       },
     }));
