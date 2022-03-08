@@ -22,7 +22,7 @@ export default function Card({ name }: { name?: string }) {
     }
   );
 
-  const { setFavorite } = useStore();
+  const { favorite, setFavorite } = useStore();
 
   if (!pokemon) {
     return null;
@@ -34,9 +34,9 @@ export default function Card({ name }: { name?: string }) {
         <Center pb='3'>
           <Button
             rightIcon={<StarIcon />}
-            colorScheme='gray'
-            variant='outline'
-            onClick={() => setFavorite(name)}
+            colorScheme={name === favorite ? 'yellow' : 'gray'}
+            variant={name === favorite ? 'solid' : 'outline'}
+            onClick={() => setFavorite(name !== favorite ? name : null)}
           >
             Favorite
           </Button>
