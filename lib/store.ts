@@ -18,7 +18,7 @@ type InitialState = Pick<State, 'active' | 'favorite' | 'page'>;
 const initialState: InitialState = {
   active: null,
   favorite: null,
-  page: PAGE_SIZE,
+  page: 0,
 };
 
 export const initializeStore = (data = {}) => {
