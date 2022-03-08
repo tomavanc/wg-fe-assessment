@@ -1,6 +1,7 @@
-import { Container, Box, Flex, Heading, Spacer } from '@chakra-ui/react';
+import { Container, Box, Flex, Spacer } from '@chakra-ui/react';
 import Head from 'next/head';
 import Card from '../components/Card';
+import Header from '../components/Header';
 import ItemList from '../components/ItemList';
 import { useStore } from '../lib/store';
 
@@ -17,7 +18,7 @@ export default function Home() {
 
       <main>
         <Container maxW={'7xl'}>
-          <Heading py='10'>Pokemon showcase</Heading>
+          <Header />
           <Flex>
             <Box w='25vw'>
               <ItemList />
