@@ -48,8 +48,10 @@ export const initializeStore = (data = {}) => {
         });
       },
       previousPage: () => {
+        const oldPage = get().page;
+
         set({
-          page: get().page - PAGE_SIZE,
+          page: oldPage !== 0 ? oldPage - PAGE_SIZE : 0,
         });
       },
     }));
