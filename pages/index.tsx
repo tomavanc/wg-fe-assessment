@@ -1,10 +1,12 @@
 import { Container, Box, Flex, Heading, Spacer } from '@chakra-ui/react';
-import type { NextPage } from 'next';
 import Head from 'next/head';
 import Card from '../components/Card';
 import ItemList from '../components/ItemList';
+import { useStore } from '../lib/store';
 
-const Home: NextPage = () => {
+export default function Home() {
+  const { active } = useStore();
+
   return (
     <div>
       <Head>
@@ -22,13 +24,11 @@ const Home: NextPage = () => {
             </Box>
             <Spacer />
             <Box w='70vw'>
-              <Card name='bulbasaur' />
+              <Card name={active} />
             </Box>
           </Flex>
         </Container>
       </main>
     </div>
   );
-};
-
-export default Home;
+}
