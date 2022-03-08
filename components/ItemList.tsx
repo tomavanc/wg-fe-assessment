@@ -7,7 +7,6 @@ export default function ItemList() {
   const { data } = useQuery(['pokemons'], fetchPokemons);
 
   const { active, setActive } = useStore();
-  console.log('active', active);
 
   return (
     <Stack h='700px' overflow='scroll'>
@@ -20,6 +19,7 @@ export default function ItemList() {
           borderWidth='1px'
           flex='1'
           borderRadius='md'
+          bg={name === active ? '#ffcb05' : '#FFF'}
           onClick={() => setActive(name)}
         >
           <Text>{name}</Text>
