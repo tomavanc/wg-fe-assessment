@@ -59,7 +59,7 @@ function PokemonList({
             color={name === favorite ? '#2a75bb' : '#000'}
             borderColor={name === favorite ? '#2a75bb' : '#E8E8E8'}
             bg={name === active ? '#ffcb05' : '#FFF'}
-            onClick={() => setActive(name)}
+            onClick={() => setActive(name !== active ? name : null)}
             justify='space-between'
             align='center'
           >
