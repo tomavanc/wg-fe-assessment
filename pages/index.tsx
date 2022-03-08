@@ -1,9 +1,10 @@
 import { Container, Box, Flex, Spacer } from '@chakra-ui/react';
 import Head from 'next/head';
 import Card from '../components/Card';
-import Header from '../components/Header';
+import Header from '../layout/Header';
 import ItemList from '../components/ItemList';
 import { useStore } from '../lib/store';
+import Footer from '../layout/Footer';
 
 export default function Home() {
   const { active } = useStore();
@@ -17,16 +18,21 @@ export default function Home() {
       </Head>
 
       <main>
-        <Container maxW={'7xl'}>
-          <Header />
-          <Flex>
-            <Box w='25vw'>
-              <ItemList />
-            </Box>
-            <Spacer />
-            <Box w='70vw'>
-              <Card name={active} />
-            </Box>
+        <Container maxW={'7xl'} h='100vh'>
+          <Flex direction='column' h='100vh'>
+            <Header />
+
+            <Flex grow='1'>
+              <Box w='25vw'>
+                <ItemList />
+              </Box>
+              <Spacer />
+              <Box w='70vw'>
+                <Card name={active} />
+              </Box>
+            </Flex>
+
+            <Footer />
           </Flex>
         </Container>
       </main>
