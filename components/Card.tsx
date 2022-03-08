@@ -29,8 +29,8 @@ export default function Card({ name }: { name?: string }) {
   }
 
   return (
-    <Center w='100%'>
-      <Flex direction='column' align='end'>
+    <Center w='100%' h='100%'>
+      <Flex direction='column' align='end' justify='center'>
         <Center pb='3'>
           <Button
             rightIcon={<StarIcon />}
@@ -43,8 +43,8 @@ export default function Card({ name }: { name?: string }) {
         </Center>
 
         <Box
-          w='500px'
-          h='700px'
+          w='400px'
+          h='600px'
           p={5}
           borderWidth='15px'
           borderColor='#ffcb05'
@@ -71,7 +71,7 @@ export default function Card({ name }: { name?: string }) {
             <Image
               src={pokemon.sprites.front_default}
               alt={pokemon.name}
-              boxSize='250px'
+              boxSize='150px'
               objectFit='cover'
               borderWidth='1px'
             />
