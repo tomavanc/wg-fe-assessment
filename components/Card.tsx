@@ -11,18 +11,18 @@ import {
 } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import { fetchPokemon } from '../api/fetchers';
-import { useStore } from '../lib/store';
+import useStore from '../lib/store';
 
-export default function Card({ name }: { name?: string }) {
+export default function Card() {
+  const { active, favorite, setFavorite } = useStore();
+
   const { data: pokemon } = useQuery(
-    ['pokemon', name],
-    () => fetchPokemon(name!),
+    ['pokemon', active],
+    () => fetchPokemon(active!),
     {
-      enabled: !!name,
+      enabled: !!active,
     }
   );
-
-  const { favorite, setFavorite } = useStore();
 
   if (!pokemon) {
     return null;
@@ -34,9 +34,11 @@ export default function Card({ name }: { name?: string }) {
         <Center pb='3'>
           <Button
             rightIcon={<StarIcon />}
-            colorScheme={name === favorite ? 'yellow' : 'gray'}
-            variant={name === favorite ? 'solid' : 'outline'}
-            onClick={() => setFavorite(name !== favorite ? name : null)}
+            colorScheme={active === favorite ? 'yellow' : 'gray'}
+            variant={active === favorite ? 'solid' : 'outline'}
+            onClick={() =>
+              setFavorite(active && active !== favorite ? active : null)
+            }
           >
             Favorite
           </Button>

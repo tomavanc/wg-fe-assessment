@@ -8,9 +8,10 @@ export interface State {
   active: string | null;
   favorite: string | null;
   page: number;
-  setActive: (pokemon: string) => void;
-  setFavorite: (pokemon: string) => void;
-  reset: () => void;
+  setActive: (pokemon: string | null) => void;
+  setFavorite: (pokemon: string | null) => void;
+  nextPage: () => void;
+  previousPage: () => void;
 }
 
 type InitialState = Pick<State, 'active' | 'favorite' | 'page'>;
@@ -21,42 +22,36 @@ const initialState: InitialState = {
   page: 0,
 };
 
-export const initializeStore = (data = {}) => {
-  const createStore = () =>
-    create<State>((set, get) => ({
-      ...initialState,
-      ...data,
-      setActive: (pokemon: string) => {
-        set({
-          active: pokemon,
-        });
-      },
-      setFavorite: (pokemon: string) => {
-        set({
-          favorite: pokemon,
-        });
-      },
-      reset: () => {
-        set({
-          active: null,
-          favorite: null,
-        });
-      },
-      nextPage: () => {
-        set({
-          page: get().page + PAGE_SIZE,
-        });
-      },
-      previousPage: () => {
-        const oldPage = get().page;
+const useStore = create<State>((set, get) => ({
+  ...initialState,
+  setActive: (pokemon: string | null) => {
+    set({
+      active: pokemon,
+    });
+  },
+  setFavorite: (pokemon: string | null) => {
+    set({
+      favorite: pokemon,
+    });
+  },
+  reset: () => {
+    set({
+      active: null,
+      favorite: null,
+    });
+  },
+  nextPage: () => {
+    set({
+      page: get().page + PAGE_SIZE,
+    });
+  },
+  previousPage: () => {
+    const oldPage = get().page;
 
-        set({
-          page: oldPage !== 0 ? oldPage - PAGE_SIZE : 0,
-        });
-      },
-    }));
+    set({
+      page: oldPage !== 0 ? oldPage - PAGE_SIZE : 0,
+    });
+  },
+}));
 
-  return createStore;
-};
-
-export const { Provider, useStore } = createContext();
+export default useStore;

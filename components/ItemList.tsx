@@ -2,7 +2,7 @@ import { StarIcon } from '@chakra-ui/icons';
 import { Flex, Text, Stack, Button, Spacer, Skeleton } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import { fetchPokemons, PokemonList } from '../api/fetchers';
-import { useStore } from '../lib/store';
+import useStore from '../lib/store';
 
 export default function ItemList() {
   const { page, nextPage, previousPage } = useStore();

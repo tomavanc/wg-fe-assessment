@@ -3,11 +3,8 @@ import Head from 'next/head';
 import Card from '../components/Card';
 import ItemList from '../components/ItemList';
 import { Header, Footer } from '../layout';
-import { useStore } from '../lib/store';
 
 export default function Home() {
-  const { active } = useStore();
-
   return (
     <div>
       <Head>
@@ -27,7 +24,7 @@ export default function Home() {
               </Box>
               <Spacer />
               <Box w='70vw'>
-                <Card name={active} />
+                <Card />
               </Box>
             </Flex>
 
